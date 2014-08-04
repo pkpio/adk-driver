@@ -116,10 +116,10 @@ adk_read (struct file *file, char __user *user_buf,
 
 	/* if the read was successful, copy the data to user space */
 	if (!retval) {
-	   // if (copy_to_user(user_buf, dev->bulk_in_buffer, count))
-	//	retval = -EFAULT;
-	  //  else
-		retval = count;
+		if (copy_to_user(user_buf, dev->bulk_in_buffer, count))
+			retval = -EFAULT;
+		else
+			retval = count;
 	}
 	
 	return retval;
@@ -141,7 +141,7 @@ adk_write (struct file *file, const char __user *user_buf,
 		goto exit;
 	}
 	
-	//print("adk_write: Writing to device");
+	print("adk_write: Writing to device");
 
 	/* Verify that the device wasn't unplugged. */
 	if (!dev->udev) {
@@ -154,10 +154,10 @@ adk_write (struct file *file, const char __user *user_buf,
 		goto exit;
 		
 	memset(buffer, 0, count);
-	//if(copy_from_user(buffer, user_buf, count)){
-	//	retval = -EFAULT;
-	//	goto exit;
-	//}
+	if(copy_from_user(buffer, user_buf, count)){
+		retval = -EFAULT;
+		goto exit;
+	}
 		
 	/* do a blocking bulk write to the device */	
 	retval = usb_bulk_msg(dev->udev,
@@ -165,8 +165,8 @@ adk_write (struct file *file, const char __user *user_buf,
 		      buffer, count, &transferred, HZ*5);
 	
 	
-	//printk("Bulk transfer return code: %d\n", retval);
-	//printk("Actual length is: %d\n", transferred);
+	printk("Bulk transfer return code: %d\n", retval);
+	printk("Actual length is: %d\n", transferred);
 	kfree(buffer);
 
 exit:
