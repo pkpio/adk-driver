@@ -1,4 +1,5 @@
-adk-adb
+adk-driver
 =======
 
-This is an attempt to read the ADB - Android Debug Bridge logs while the device is running in ADK mode.  
+This has kernel and userspace implementations to set an Android device into 
+ADK (Accessory Development Kit) mode.  
