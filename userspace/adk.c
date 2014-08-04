@@ -190,6 +190,11 @@ static int setupAccessory(
 	}
 
 
+	/* -TODO- 
+	 * Change the passing of NULL to libusb_open_device_with_vid_pid
+	 * It should be a context pointer. The value in the pointer can be NULL
+	 * Check BBBIfs repo for reference. 	
+	 */
 	for(;;){//attempt to connect to new PID, if that doesn't work try ACCESSORY_PID_ALT
 		tries--;
 		if((handle = libusb_open_device_with_vid_pid(NULL, VID, ACCESSORY_PID)) == NULL){			
