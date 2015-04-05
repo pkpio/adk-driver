@@ -1,33 +1,22 @@
 adk-driver
 =======
-
-Kernel and userspace implementations to set an Android device into 
-ADK (Accessory Development Kit) mode.
+Kernel driver to set device into ADK (Accessory Development Kit) mode. 
 
 
-kernelspace
+Support
 --------------
-Contains a kernel driver which can set your device into adk-mode with support 
-for read and write operations
+Supports nearly 8000+ devices. Check list of supported devices in devices.h file. Support is added for each Manufacturer => Device is supported if the manufacturer is in the list.
 
-
-userspace
----------------
-An userspace implementation for adk-mode setting using libusb.
-
-
-Note
----------------
-Both the implementations are tested working. Choose any version of your choice.
-For begginners userspace code is recommended.
+Note: If you are planning on writing another independent driver which works after device enters ADK mode, You should uncomment Google from device table and add each Google devices individually as shown for Nexus 10, as an example. This is because Android devices use Google's vendor id as vendor id in ADK mode. This will clash with your independent driver's device table.
 
 
 Author
 ---------------
-Praveen Kumar Pendyala <<praveen@praveenkumar.co.in>> <br />
-http://praveenkumar.co.in
+Praveen Kumar Pendyala
+http://praveen.xyz
 
 
 License
 ---------------
 Licensed under GPL v2 
+
