@@ -175,6 +175,15 @@
 #define VENDOR_ID_YULONG_COOLPAD 0x1EBF
 // ZTE's USB Vendor ID
 #define VENDOR_ID_ZTE           0x19D2
+
+/**
+ * Google devices are added manually through Vendor and Product ids
+ */
+#define PRODUCT_NEXUS4		0x6860
+#define PRODUCT_NEXUS5		0x4ee6
+#define PRODUCT_NEXUS7		0xffff
+#define	PRODUCT_NEXUS10		0x4ee2
+#define PRODUCT_NEXUS6		0xffff
 /* Keep the list above sorted alphabetically by #define name */
 
 
