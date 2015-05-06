@@ -180,10 +180,10 @@
  * Google devices are added manually through Vendor and Product ids
  */
 #define PRODUCT_NEXUS4		0x6860
-#define PRODUCT_NEXUS5		0x4ee6
-#define PRODUCT_NEXUS7		0xffff
+#define PRODUCT_NEXUS5		0x4ee1
+#define PRODUCT_NEXUS7		0x4e42
 #define	PRODUCT_NEXUS10		0x4ee2
-#define PRODUCT_NEXUS6		0xffff
+#define PRODUCT_NEXUS6		0x4ee7
 /* Keep the list above sorted alphabetically by #define name */
 
 
