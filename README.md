@@ -8,9 +8,16 @@ Support
 Supports nearly 8000+ devices. Check list of supported devices in devices.h file. Support is added for each Manufacturer => Device is supported if the manufacturer is in the list.
 
 
-Note
+Google Devices
 ---------------
-If you are planning on writing another independent driver which works after device enters ADK mode, you should uncomment Google from device table and add each Google devices individually as shown for Nexus 10, as an example. This is because all Android devices use Google's vendor id as vendor id in ADK mode. This will clash with your independent driver's device table.
+Google Devices should be added to the list manually. Currently supported Google devices are:
+- Nexus 4
+- Nexus 5
+- Nexus 6
+- Nexus 7
+- Nexus 10
+
+Please open an issue if you have a device from Google that's not one of the above
 
 
 Author
