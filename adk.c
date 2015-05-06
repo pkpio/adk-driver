@@ -51,15 +51,6 @@ static struct usb_device_id adk_devices [] = {
 	 .match_flags = USB_DEVICE_ID_MATCH_VENDOR,},
 	{.idVendor = VENDOR_ID_GIONEE,
 	 .match_flags = USB_DEVICE_ID_MATCH_VENDOR,},
-	/**
-	 * Google vendor id clashes with main driver
-	 * Currently commented out. Add support to 
-	 * Google devices the old way for now. Check 
-	 * Nexus 10 example at the end of this list.
-	 *
-	 *{.idVendor = VENDOR_ID_GOOGLE,
-	 * .match_flags = USB_DEVICE_ID_MATCH_VENDOR,},
-	 */
 	{.idVendor = VENDOR_ID_HAIER,
 	 .match_flags = USB_DEVICE_ID_MATCH_VENDOR,},
 	{.idVendor = VENDOR_ID_HARRIS,
@@ -177,10 +168,13 @@ static struct usb_device_id adk_devices [] = {
 	{.idVendor = VENDOR_ID_ZTE,
 	 .match_flags = USB_DEVICE_ID_MATCH_VENDOR,},
 	/**
-	 * Nexus 10. Google devices should be added like this.
+	 * Google devices, each should be added manually
 	 */
-	{USB_DEVICE_AND_INTERFACE_INFO(
-		VENDOR_ID_GOOGLE, 0x4ee2, 0xff, 0x42, 0x00)},
+	{ USB_DEVICE(VENDOR_ID_GOOGLE, PRODUCT_NEXUS4) },
+	{ USB_DEVICE(VENDOR_ID_GOOGLE, PRODUCT_NEXUS5) },
+	{ USB_DEVICE(VENDOR_ID_GOOGLE, PRODUCT_NEXUS7) },
+	{ USB_DEVICE(VENDOR_ID_GOOGLE, PRODUCT_NEXUS10) },
+	{ USB_DEVICE(VENDOR_ID_GOOGLE, PRODUCT_NEXUS6) },
 	{ } /* Terminating entry */
 };
 
@@ -200,7 +194,7 @@ adk_probe (struct usb_interface *interface, const struct usb_device_id *id)
 {
 	struct adk_device *dev;
 	int retval = -ENODEV;
-	print("Device attached");
+	print("Android device attached");
 	
 	dev = kmalloc(sizeof(*dev), GFP_KERNEL);
 	if (dev == NULL) {
@@ -208,7 +202,7 @@ adk_probe (struct usb_interface *interface, const struct usb_device_id *id)
 		goto exit;
 	}
 	
-	printk("Product id is: %04x \n", id->idProduct);
+	printk("Vendor id : Product id : %04x \n", id->idVendor, id->idProduct);
 
 	memset(dev, 0x00, sizeof(*dev));
 	
@@ -226,7 +220,7 @@ exit:
 
 static void
 adk_disconnect (struct usb_interface *interface){
-	print("Device detached");
+	print("Android device detached");
 }
 
 static struct usb_driver adk_driver = {
@@ -240,13 +234,12 @@ static int __init
 adk_init (void)
 {
 	int result;
-	print("Init called!");
 
 	result = usb_register(&adk_driver);
 	if (result)
 		print("Registering driver failed!");
 	else
-		print("Driver registered successfully!");
+		print("Adk driver registered successfully!");
 
 	return result;
 }
@@ -255,7 +248,7 @@ static void __exit
 adk_exit (void)
 {
 	usb_deregister(&adk_driver);
-	print("Exit called!");
+	print("Adk driver de-registered!");
 }
 
 module_init(adk_init);
