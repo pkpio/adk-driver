@@ -202,7 +202,7 @@ adk_probe (struct usb_interface *interface, const struct usb_device_id *id)
 		goto exit;
 	}
 	
-	printk("Vendor id : Product id : %04x \n", id->idVendor, id->idProduct);
+	printk("Vendor id : %04x Product id : %04x \n", id->idVendor, id->idProduct);
 
 	memset(dev, 0x00, sizeof(*dev));
 	
