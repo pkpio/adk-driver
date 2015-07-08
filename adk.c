@@ -209,12 +209,14 @@ adk_probe (struct usb_interface *interface, const struct usb_device_id *id)
 	dev->udev = interface_to_usbdev(interface);
 	if (!dev->udev) {
 		retval = -ENODEV;
+		goto exit;
 	}
 
 	retval = setup_accessory(dev, ADK_MAN, ADK_MOD, ADK_DES, 
 			 		ADK_VER, ADK_URI, ADK_SER);
 			 		
 exit:
+	kfree(dev);
 	return retval;
 }
 
