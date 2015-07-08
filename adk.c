@@ -194,15 +194,13 @@ adk_probe (struct usb_interface *interface, const struct usb_device_id *id)
 {
 	struct adk_device *dev;
 	int retval = -ENODEV;
-	print("Android device attached");
-	
+
 	dev = kmalloc(sizeof(*dev), GFP_KERNEL);
 	if (dev == NULL) {
 		retval = -ENOMEM;
 		goto exit;
 	}
 	
-	printk("Vendor id : %04x Product id : %04x \n", id->idVendor, id->idProduct);
 
 	memset(dev, 0x00, sizeof(*dev));
 	
@@ -214,7 +212,7 @@ adk_probe (struct usb_interface *interface, const struct usb_device_id *id)
 
 	retval = setup_accessory(dev, ADK_MAN, ADK_MOD, ADK_DES, 
 			 		ADK_VER, ADK_URI, ADK_SER);
-			 		
+	printk("Android device setup: vendor id %04x: Product id : %04x\n", id->idVendor, id->idProduct);		 		
 exit:
 	kfree(dev);
 	return retval;
@@ -235,22 +233,13 @@ static struct usb_driver adk_driver = {
 static int __init
 adk_init (void)
 {
-	int result;
-
-	result = usb_register(&adk_driver);
-	if (result)
-		print("Registering driver failed!");
-	else
-		print("Adk driver registered successfully!");
-
-	return result;
+	return usb_register(&adk_driver);
 }
 
 static void __exit
 adk_exit (void)
 {
 	usb_deregister(&adk_driver);
-	print("Adk driver de-registered!");
 }
 
 module_init(adk_init);
