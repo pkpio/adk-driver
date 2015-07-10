@@ -4,12 +4,12 @@
 #include <linux/module.h>
 
 /* ADK identification params */
-#define ADK_MAN "BeagleBone"			/* Board manufacturer */
-#define ADK_MOD "BeagleBone Black"		/* Board model */
-#define ADK_DES "Development platform"		/* Board description */
-#define ADK_VER "1.0"				/* Board version */
-#define ADK_URI "http://beagleboard.org/"	/* Board url */
-#define ADK_SER "42"				/* Board serial */
+#define ADK_MAN "adk_serial_linux"                              /* Board manufacturer */
+#define ADK_MOD "Linux"                                         /* Board model */
+#define ADK_DES "Device with Linux adk kernel module"           /* Board description */
+#define ADK_VER "1.0"                                           /* Board version */
+#define ADK_URI "https://github.com/Phasip/adk-serial-driver"   /* Board url */
+#define ADK_SER "1"                                             /* Board serial */
 
 /* AOA protocol ids */
 #define AOA_GET_PROTOCOL		51
